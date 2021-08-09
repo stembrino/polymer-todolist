@@ -1,0 +1,53 @@
+<link type="text/html" rel="import" href="../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html" />
+<link type="text/html" rel="import" href="./services/tasks-service.html" />
+<link type="text/html" rel="import" href="./components/custom-table/custom-table.html" />
+<link type="text/html" rel="import" href="./components/form-task/polymer-form-task.html" />
+<link rel="import" href="./components/spinner-load/spinner-load.html" />
+
+<dom-module id="todo-list-app">
+  <template>
+    <style>
+      .container-app {
+        display: flex;
+        --elements-margin: 10px;
+      }
+      .container-task-table {
+        width: 80%;
+        padding: var(--elements-margin);
+      }
+      .container-task-form {
+        width: 30%;
+        padding: var(--elements-margin);
+      }
+
+      .container-spinner-loader {
+        text-align: center;
+      }
+
+      @media (min-width: 320px) and (max-width: 600px) {
+        .container-app {
+          display: block;
+        }
+      }
+    </style>
+    <div class="container-app">
+      <tasks-service></tasks-service>
+      <div class="container-task-table">
+        <template is="dom-if" if="{{dataTableLoaded}}">
+          <custom-table tabletitle="[[tabletitle]]" tasks="[[tasks]]"></custom-table>
+        </template>
+        <template is="dom-if" if="{{!dataTableLoaded}}">
+          <div class="container-spinner-loader">
+            <spinner-load></spinner-load>
+          </div>
+        </template>
+      </div>
+      <div class="container-task-form">
+        <polymer-form-task></polymer-form-task>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="./todo-list-app.js"></script>
+</dom-module>

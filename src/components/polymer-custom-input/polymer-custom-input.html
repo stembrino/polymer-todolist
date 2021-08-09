@@ -1,0 +1,57 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html" />
+
+<dom-module id="polymer-custom-input">
+  <template>
+    <style>
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
+
+      .form__label {
+        font-family: "Roboto", sans-serif;
+        font-size: 13px;
+        margin-left: 10px;
+        margin-top: 0.7rem;
+        display: block;
+        transition: all 0.3s;
+        transform: translateY(0rem);
+        color: rgb(114, 114, 114);
+      }
+
+      .form__input {
+        font-size: 13px;
+        font-family: "Roboto", sans-serif;
+        color: rgb(0, 0, 0);
+        padding: 5px 10px;
+        border-radius: 2px;
+        background-color: rgb(240, 240, 240);
+        border: none;
+        border-bottom-color: currentcolor;
+        border-bottom-style: none;
+        border-bottom-width: medium;
+        width: 90%;
+        display: block;
+        border-bottom: 0.3rem solid transparent;
+        transition: all 0.3s;
+      }
+
+      .form__input:placeholder-shown + .form__label {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: translateY(-2rem);
+        transform: translateY(-2rem);
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <div class="form__group">
+      <input type="text" class="form__input" id="[[id]]" placeholder="[[placeholdertext]]" required="" />
+      <label for="name" class="form__label">[[labelname]]</label>
+    </div>
+  </template>
+
+  <script type="module" src="./polymer-custom-input.js"></script>
+</dom-module>

@@ -1,0 +1,32 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../add-btn/add-btn.html" />
+<link rel="import" href="../polymer-custom-input/polymer-custom-input.html" />
+<!-- <link rel = "import" href = "../../../bower_components/iron-form/iron-form.html"> -->
+
+<dom-module id="polymer-form-task">
+  <template>
+    <style>
+      .container-form {
+        display: grid;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        padding: 8px;
+        background-color: white;
+      }
+      .container-inputs {
+        margin-bottom: 20px;
+      }
+    </style>
+    <form is="iron-form">
+      <div class="container-form">
+        <div class="container-inputs">
+          <polymer-custom-input labelname="[[labeltaskname]]" placeholdertext="[[labeltaskname]]"></polymer-custom-input>
+          <br />
+          <polymer-custom-input labelname="[[labeltasknote]]" placeholdertext="[[labeltasknote]]"></polymer-custom-input>
+        </div>
+        <add-btn on-click="submitTask"></add-btn>
+      </div>
+    </form>
+  </template>
+
+  <script src="./polymer-form-task.js"></script>
+</dom-module>

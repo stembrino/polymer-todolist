@@ -1,0 +1,31 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../../bower_components/polymer/lib/elements/dom-repeat.html" />
+<link rel="import" href="../../../bower_components/polymer/lib/elements/dom-if.html" />
+<link rel="import" href="../../../bower_components/polymer/lib/mixins/properties-changed.html" />
+<link rel="import" href="../table-row/table-row.html" />
+
+<dom-module id="custom-table">
+  <template>
+    <style>
+      .template-table {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        padding: 8px;
+        background-color: white;
+      }
+      .table-title {
+        font-size: 20px;
+      }
+    </style>
+    <div class="template-table">
+      <div class="table-title">{{tabletitle}}</div>
+        <template is="dom-repeat" items="{{tasks}}" as="task">
+          <table-row
+            date="[[task.dateTime]]"
+            name="[[task.name]]"
+            note="[[task.note]]"
+          ></table-row>
+        </template>
+      </template>
+    </div>
+  <script src="./custom-table.js"></script>
+</dom-module>

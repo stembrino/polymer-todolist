@@ -1,0 +1,55 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html" />
+<dom-module id="table-row">
+  <template>
+    <style>
+      .template-row {
+        margin: 15px 15px;
+      }
+      .template-content-row {
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+          rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+        border-radius: 2px;
+        cursor: default;
+        font-size: 17px;
+        cursor: pointer;
+        height: 35px;
+        --padding-row: 8px;
+        padding-right: var(--padding-row);
+        padding-left: var(--padding-row);
+      }
+
+      .template-content-row:hover {
+        box-shadow: rgba(44, 58, 73, 0.4) 0px 0px 0px 2px, rgba(253, 253, 253, 0.65) 0px 4px 6px -1px,
+          rgba(247, 247, 247, 0.08) 0px 1px 0px inset;
+        background-color: #e8e8e8;
+      }
+      .commons-element-row {
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+      }
+      .date-time-task {
+        z-index: 1000;
+        padding-right: 8px;
+        font-style: italic;
+        border-right: 1px solid #969696;
+      }
+      .template-content-row:hover .date-time-task {
+        border-right: 1px solid #cacaca;
+      }
+      .name-task {
+        /* TODO AVOID word wrap */
+      }
+      .note-task {
+      }
+    </style>
+    <div class="template-row">
+      <div class="template-content-row">
+        <span class="commons-element-row date-time-task">{{ date }}</span>
+        <span class="commons-element-row name-task">{{ name }}: </span>
+        <span class="commons-element-row note-task">{{ note }}</span>
+      </div>
+    </div>
+  </template>
+  <script src="./table-row.js"></script>
+</dom-module>

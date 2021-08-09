@@ -1,0 +1,34 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html" />
+
+<dom-module id="add-btn">
+  <template>
+    <style>
+      .btn {
+        border-radius: 2px;
+        color: #5e5e5e;
+        border: 1px solid #5e5e5e;
+        height: 32px;
+        box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 3px transparent;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: calc(32px - 1px * 2);
+        padding: 0 16px;
+        text-align: center;
+        text-decoration: none;
+        transition-duration: 167ms;
+      }
+      .btn:hover {
+        background-color: #e8e8e8;
+        -webkit-box-shadow: inset 0 0 0 1px #555555;
+        box-shadow: inset 0 0 0 1px #555555;
+        color: #555555;
+        border: 1px solid #555555;
+      }
+    </style>
+    <div class="btn">Include Task</div>
+  </template>
+
+  <script src="./add-btn.js"></script>
+</dom-module>
