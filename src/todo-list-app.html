@@ -1,6 +1,5 @@
 <link type="text/html" rel="import" href="../bower_components/polymer/polymer-element.html" />
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html" />
-<link type="text/html" rel="import" href="./services/tasks-service.html" />
 <link type="text/html" rel="import" href="./components/custom-table/custom-table.html" />
 <link type="text/html" rel="import" href="./components/form-task/polymer-form-task.html" />
 <link rel="import" href="./components/spinner-load/spinner-load.html" />
@@ -28,6 +27,15 @@
       @media (min-width: 320px) and (max-width: 600px) {
         .container-app {
           display: block;
+          --elements-margin: 5px;
+        }
+        .container-task-table {
+          width: 100%;
+          padding: var(--elements-margin);
+        }
+        .container-task-form {
+          width: 100%;
+          padding: var(--elements-margin);
         }
       }
     </style>

@@ -1,4 +1,6 @@
-export class TasksService extends Polymer.Element {
+import { EVENT_LISTENER_TYPES, initEventListnet } from "../tools/util/eventListenerInicializer.js";
+
+export class TasksService {
   mockTasks = [
     {
       dateTime: "12/10/2020",
@@ -16,22 +18,27 @@ export class TasksService extends Polymer.Element {
       note: "some note test",
     },
   ];
+  eventListenerDataTable;
+  eventListenerShowTable;
 
-  static get is() {
-    return "tasks-service";
+  constructor() {
+    this.eventListenerDataTable = initEventListnet(EVENT_LISTENER_TYPES.SEND_DATA_TABLE, this.mockTasks);
+    this.eventListenerShowTable = initEventListnet(EVENT_LISTENER_TYPES.SHOW_TABLE);
+  }
+
+  /**
+   *
+   * @param {Task} task
+   */
+  addTask(task) {
+    this.mockTasks.push(task);
+    document.dispatchEvent(this.eventListenerDataTable);
   }
 
   getMockTasks() {
-    const customEvent = new CustomEvent("sendDataEvent", { detail: this.mockTasks });
     setTimeout(() => {
-      document.dispatchEvent(customEvent);
-      document.dispatchEvent(this.showTable());
-    }, 1500);
-  }
-
-  showTable() {
-    return new CustomEvent("showTable")
+      document.dispatchEvent(this.eventListenerDataTable);
+      document.dispatchEvent(this.eventListenerShowTable);
+    }, 500);
   }
 }
-
-window.customElements.define(TasksService.is, TasksService);

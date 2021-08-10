@@ -1,5 +1,4 @@
 class CustomTable extends Polymer.Element {
-
   static get is() {
     return "custom-table";
   }
@@ -10,6 +9,9 @@ class CustomTable extends Polymer.Element {
         type: Array,
       },
     };
+  }
+  clickRefreshTable() {
+    
   }
 }
 

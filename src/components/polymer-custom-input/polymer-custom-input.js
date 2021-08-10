@@ -5,7 +5,7 @@ class PolymerCustomInput extends Polymer.Element {
 
   static get properties() {
     return {
-      id: {
+      inputid: {
         type: String,
         value: "Dump Id",
       },
@@ -18,6 +18,10 @@ class PolymerCustomInput extends Polymer.Element {
         value: "Dump Label",
       },
     };
+  }
+
+  ready() {
+    super.ready();
   }
 }
 

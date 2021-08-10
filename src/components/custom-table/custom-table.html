@@ -14,10 +14,24 @@
       }
       .table-title {
         font-size: 20px;
+        width: 50%;
+      }
+      .refresh-btn {
+        width: 50%;
+        display: flex;
+        flex-direction: row-reverse;
+        /* background-image: url(\images\refresh.png); */
+        cursor: pointer;
+      }
+      .table-panel {
+        display: flex;
       }
     </style>
     <div class="template-table">
-      <div class="table-title">{{tabletitle}}</div>
+      <div class="table-panel">
+        <div class="table-title">{{tabletitle}}</div>
+        <button class="refresh-btn" on-click="clickRefreshTable">REFRESH DATA</button>
+      </div>
         <template is="dom-repeat" items="{{tasks}}" as="task">
           <table-row
             date="[[task.dateTime]]"

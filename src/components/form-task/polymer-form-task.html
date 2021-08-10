@@ -16,17 +16,17 @@
         margin-bottom: 20px;
       }
     </style>
-    <form is="iron-form">
+    <form is="taskForm">
       <div class="container-form">
         <div class="container-inputs">
-          <polymer-custom-input labelname="[[labeltaskname]]" placeholdertext="[[labeltaskname]]"></polymer-custom-input>
+          <polymer-custom-input id="taskTitleForm" inputid="taskTitle" labelname="[[labeltaskname]]" placeholdertext="[[labeltaskname]]"></polymer-custom-input>
           <br />
-          <polymer-custom-input labelname="[[labeltasknote]]" placeholdertext="[[labeltasknote]]"></polymer-custom-input>
+          <polymer-custom-input id="taskNoteForm" inputid="taskNote" labelname="[[labeltasknote]]" placeholdertext="[[labeltasknote]]"></polymer-custom-input>
         </div>
         <add-btn on-click="submitTask"></add-btn>
       </div>
     </form>
   </template>
 
-  <script src="./polymer-form-task.js"></script>
+  <script type="module" src="./polymer-form-task.js"></script>
 </dom-module>
