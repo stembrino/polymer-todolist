@@ -1,5 +1,5 @@
-import { Task } from "../../entities/Task.js";
-import { DependencieInjection } from "../../tools/util/dependencieInjection.js";
+import { DependencyInjection } from "../../tools/util/dependencyInjection.js";
+
 class PolymerFormTask extends Polymer.Element {
   title;
   note;
@@ -8,7 +8,7 @@ class PolymerFormTask extends Polymer.Element {
 
   constructor() {
     super();
-    this.tasksService = DependencieInjection.injectTaskService();
+    this.tasksService = DependencyInjection.injectTaskService();
   }
 
   static get is() {
@@ -28,18 +28,22 @@ class PolymerFormTask extends Polymer.Element {
     };
   }
 
-  isValidationTask(date, name, note) {
+  isAnValidTask(date, name, note) {
     /**TODO: validation task */
     let hasnoValueEmpty = date && name && note;
     return hasnoValueEmpty;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+  }
+
   submitTask() {
     this.title = this.getShadowDomPolymer("taskTitleForm", "#taskTitle").value;
     this.note = this.getShadowDomPolymer("taskNoteForm", "#taskNote").value;
-    if (!this.isValidationTask("test date", this.title, this.note))
+    if (!this.isAnValidTask("test date", this.title, this.note))
       return console.info("do some stuff to indicate that is not valid Task");
-    this.task = DependencieInjection.injectTask("21/12/2021", this.title, this.note);
+    this.task = DependencyInjection.injectTask("21/12/2021", this.title, this.note);
     this.tasksService.addTask(this.task.getTaskAdapted());
   }
 

@@ -1,8 +1,13 @@
 import { EVENT_LISTENER_TYPES } from "./tools/util/eventListenerInicializer.js";
-import { DependencieInjection } from "./tools/util/dependencieInjection.js";
+import { DependencyInjection } from "./tools/util/dependencyInjection.js";
+import { copyObject } from "./tools/util/tool.js";
 
 class TodoListApp extends Polymer.Element {
   taskService;
+
+  constructor() {
+    super();
+  }
 
   static get is() {
     return "todo-list-app";
@@ -25,9 +30,6 @@ class TodoListApp extends Polymer.Element {
         type: Boolean,
         value: false,
       },
-      refreshTable: {
-        type: Function,
-      },
     };
   }
 
@@ -40,9 +42,8 @@ class TodoListApp extends Polymer.Element {
    */
   ready() {
     super.ready();
-    this.taskService = DependencieInjection.injectTaskService();
-    this.taskService.getMockTasks();
-    this.updateDataTable = this.updateDataTable.bind(this);
+    this.taskService = DependencyInjection.injectTaskService();
+    this.taskService.fetchAllTasks();
     this.setDataTableLoaded = this.setDataTableLoaded.bind(this);
   }
 
@@ -64,18 +65,17 @@ class TodoListApp extends Polymer.Element {
     document.removeEventListener(EVENT_LISTENER_TYPES.SHOW_TABLE, this.setDataTableLoaded);
   }
 
-  updateDataTable(event) {
-    console.log('this.set("tasks", event.detail); has been called!!!!');
-    console.log(event.detail);
-    this.set("tasks", event.detail);
-  }
+  /**
+   * @Learning you can use Arrow function to avoid ".bind(this)" in the constructor or ready function
+   * @param {Object} event event send from eventListener in Servrvice
+   */
+  updateDataTable = (event) => {
+    /** Create a new Object to force update */
+    this.set("tasks", copyObject(event.detail));
+  };
 
   setDataTableLoaded() {
     this.set("dataTableLoaded", true);
-  }
-
-  refreshTable() {
-    console.log("Super component");
   }
 }
 

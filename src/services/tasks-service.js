@@ -1,7 +1,8 @@
+import { Task } from "../entities/Task.js";
 import { EVENT_LISTENER_TYPES, initEventListnet } from "../tools/util/eventListenerInicializer.js";
 
 export class TasksService {
-  mockTasks = [
+  _mockTasks = [
     {
       dateTime: "12/10/2020",
       name: "first task test",
@@ -22,7 +23,7 @@ export class TasksService {
   eventListenerShowTable;
 
   constructor() {
-    this.eventListenerDataTable = initEventListnet(EVENT_LISTENER_TYPES.SEND_DATA_TABLE, this.mockTasks);
+    this.eventListenerDataTable = initEventListnet(EVENT_LISTENER_TYPES.SEND_DATA_TABLE, this._mockTasks);
     this.eventListenerShowTable = initEventListnet(EVENT_LISTENER_TYPES.SHOW_TABLE);
   }
 
@@ -31,11 +32,16 @@ export class TasksService {
    * @param {Task} task
    */
   addTask(task) {
-    this.mockTasks.push(task);
+    this._mockTasks.push(task);
     document.dispatchEvent(this.eventListenerDataTable);
   }
 
-  getMockTasks() {
+  refreshTable() {
+    /**TODO: verify if data changed */
+    this.fetchAllTasks();
+  }
+
+  fetchAllTasks() {
     setTimeout(() => {
       document.dispatchEvent(this.eventListenerDataTable);
       document.dispatchEvent(this.eventListenerShowTable);

@@ -13,15 +13,21 @@
         background-color: white;
       }
       .table-title {
+        cursor: default;
         font-size: 20px;
-        width: 50%;
+        width: 80%;
       }
       .refresh-btn {
-        width: 50%;
+        width: 20%;
+        text-align: center;
         display: flex;
+        justify-content: center;
         flex-direction: row-reverse;
         /* background-image: url(\images\refresh.png); */
         cursor: pointer;
+        color: #fff;
+        background-color: #4f5b6a;
+        font-weight: bold;
       }
       .table-panel {
         display: flex;
@@ -30,7 +36,7 @@
     <div class="template-table">
       <div class="table-panel">
         <div class="table-title">{{tabletitle}}</div>
-        <button class="refresh-btn" on-click="clickRefreshTable">REFRESH DATA</button>
+        <button class="refresh-btn" on-click="clickRefreshTable">Refresh Table</button>
       </div>
         <template is="dom-repeat" items="{{tasks}}" as="task">
           <table-row
@@ -41,5 +47,5 @@
         </template>
       </template>
     </div>
-  <script src="./custom-table.js"></script>
+  <script type="module" src="./custom-table.js"></script>
 </dom-module>

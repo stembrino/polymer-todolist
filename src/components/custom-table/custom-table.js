@@ -1,7 +1,17 @@
+import { DependencyInjection } from "../../tools/util/dependencyInjection.js";
+
 class CustomTable extends Polymer.Element {
+  taskService;
+
+  constructor() {
+    super();
+    this.taskService = DependencyInjection.injectTaskService();
+  }
+
   static get is() {
     return "custom-table";
   }
+
   static get properties() {
     return {
       tabletitle: String,
@@ -10,8 +20,9 @@ class CustomTable extends Polymer.Element {
       },
     };
   }
+
   clickRefreshTable() {
-    
+    this.taskService.refreshTable();
   }
 }
 
