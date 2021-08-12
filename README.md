@@ -1,5 +1,6 @@
 # Onboardin application (start polymer)
 
+## Simple project to understand how the Polymer components works
 
 
 ## Install the Polymer-CLI
