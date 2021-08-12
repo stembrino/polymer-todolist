@@ -43,7 +43,7 @@ class PolymerFormTask extends Polymer.Element {
     this.note = this.getShadowDomPolymer("taskNoteForm", "#taskNote").value;
     if (!this.isAnValidTask("test date", this.title, this.note))
       return console.info("do some stuff to indicate that is not valid Task");
-    this.task = DependencyInjection.injectTask("21/12/2021", this.title, this.note);
+    this.task = DependencyInjection.instancieteTask("21/12/2021", this.title, this.note);
     this.tasksService.addTask(this.task.getTaskAdapted());
   }
 
