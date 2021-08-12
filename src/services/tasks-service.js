@@ -1,8 +1,10 @@
 import { Task } from "../entities/Task.js";
 import { EVENT_LISTENER_TYPES, initEventListnet } from "../tools/util/eventListenerInicializer.js";
 import { getRequest } from "../tools/util/fetchAPI.js";
+import { AdapterTasks } from "../tools/adapters/adapterTasks.js";
 
 export class TasksService {
+  tasks;
   _mockTasks = [
     {
       dateTime: "12/10/2020",
@@ -22,10 +24,12 @@ export class TasksService {
   ];
   eventListenerDataTable;
   eventListenerShowTable;
+  eventListenerHasError;
 
   constructor() {
-    this.eventListenerDataTable = initEventListnet(EVENT_LISTENER_TYPES.SEND_DATA_TABLE, this._mockTasks);
+    this.eventListenerDataTable = initEventListnet(EVENT_LISTENER_TYPES.SEND_DATA_TABLE, this.tasks);
     this.eventListenerShowTable = initEventListnet(EVENT_LISTENER_TYPES.SHOW_TABLE);
+    this.eventListenerHasError = initEventListnet(EVENT_LISTENER_TYPES.HAS_ERROR_LISTENER, true);
   }
 
   /**
@@ -33,7 +37,7 @@ export class TasksService {
    * @param {Task} task
    */
   addTask(task) {
-    this._mockTasks.push(task);
+    this.tasks.push(task);
     document.dispatchEvent(this.eventListenerDataTable);
   }
 
@@ -43,12 +47,18 @@ export class TasksService {
   }
 
   async fetchAllTasks() {
-    /**TODO take request */
-    let test = await getRequest("http://jsonplaceholder.typicode.com/users");
-    console.log(test);
-    setTimeout(() => {
+    try {
+      let dataTable = await getRequest("http://jsonplaceholder.typicode.com/users");
+      // let dataTable = await getRequest("http://jsonplaceholde.typicode.com/users"); //froce an error
+      this.tasks = AdapterTasks.taskListAdapter(dataTable);
+      this.eventListenerDataTable.payload = this.tasks;
       document.dispatchEvent(this.eventListenerDataTable);
       document.dispatchEvent(this.eventListenerShowTable);
-    }, 500);
+    } catch (error) {
+      console.info(error);
+      console.info("request fail");
+      document.dispatchEvent(this.eventListenerHasError);
+      this.eventListenerDataTable.payload = this._mockTasks;
+    }
   }
 }

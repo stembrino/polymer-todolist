@@ -3,6 +3,7 @@
 <link type="text/html" rel="import" href="./components/custom-table/custom-table.html" />
 <link type="text/html" rel="import" href="./components/form-task/polymer-form-task.html" />
 <link rel="import" href="./components/spinner-load/spinner-load.html" />
+<link rel="import" href="./components/template-error/template-error.html" />
 
 <dom-module id="todo-list-app">
   <template>
@@ -39,22 +40,27 @@
         }
       }
     </style>
-    <div class="container-app">
-      <tasks-service></tasks-service>
-      <div class="container-task-table">
-        <template is="dom-if" if="{{dataTableLoaded}}">
-          <custom-table tabletitle="[[tabletitle]]" tasks="[[tasks]]"></custom-table>
-        </template>
-        <template is="dom-if" if="{{!dataTableLoaded}}">
-          <div class="container-spinner-loader">
-            <spinner-load></spinner-load>
-          </div>
-        </template>
+    <template is="dom-if" if="{{!error}}">
+      <div class="container-app">
+        <tasks-service></tasks-service>
+        <div class="container-task-table">
+          <template is="dom-if" if="{{dataTableLoaded}}">
+            <custom-table tabletitle="[[tabletitle]]" tasks="[[tasks]]"></custom-table>
+          </template>
+          <template is="dom-if" if="{{!dataTableLoaded}}">
+            <div class="container-spinner-loader">
+              <spinner-load></spinner-load>
+            </div>
+          </template>
+        </div>
+        <div class="container-task-form">
+          <polymer-form-task></polymer-form-task>
+        </div>
       </div>
-      <div class="container-task-form">
-        <polymer-form-task></polymer-form-task>
-      </div>
-    </div>
+    </template>
+    <template is="dom-if" if="{{error}}">
+      <template-error></template-error>
+    </template>
   </template>
 
   <script type="module" src="./todo-list-app.js"></script>

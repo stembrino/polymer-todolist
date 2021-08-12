@@ -5,6 +5,12 @@ export class Task {
   _name = "";
   _note = "";
 
+  /**
+   * 
+   * @param {String} date 
+   * @param {String} name 
+   * @param {String} note 
+   */
   constructor(date, name, note) {
     this._date = date;
     this._name = name;

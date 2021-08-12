@@ -30,6 +30,10 @@ class TodoListApp extends Polymer.Element {
         type: Boolean,
         value: false,
       },
+      error: {
+        type: Boolean,
+        value: false,
+      },
     };
   }
 
@@ -45,6 +49,8 @@ class TodoListApp extends Polymer.Element {
     this.taskService = DependencyInjection.injectTaskService();
     this.taskService.fetchAllTasks();
     this.setDataTableLoaded = this.setDataTableLoaded.bind(this);
+    this.updateDataTable = this.updateDataTable.bind(this);
+    this.hasError = this.hasError.bind(this);
   }
 
   /**
@@ -57,25 +63,31 @@ class TodoListApp extends Polymer.Element {
 
     document.addEventListener(EVENT_LISTENER_TYPES.SEND_DATA_TABLE, this.updateDataTable);
     document.addEventListener(EVENT_LISTENER_TYPES.SHOW_TABLE, this.setDataTableLoaded);
+    document.addEventListener(EVENT_LISTENER_TYPES.HAS_ERROR_LISTENER, this.hasError);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener(EVENT_LISTENER_TYPES.SEND_DATA_TABLE, this.updateDataTable);
     document.removeEventListener(EVENT_LISTENER_TYPES.SHOW_TABLE, this.setDataTableLoaded);
+    document.removeEventListener(EVENT_LISTENER_TYPES.HAS_ERROR_LISTENER, this.hasError);
   }
 
   /**
    * @Learning you can use Arrow function to avoid ".bind(this)" in the constructor or ready function
    * @param {Object} event event send from eventListener in Servrvice
    */
-  updateDataTable = (event) => {
+  updateDataTable(event) {
     /** Create a new Object to force update */
-    this.set("tasks", copyObject(event.detail));
-  };
+    this.set("tasks", copyObject(event.payload));
+  }
 
   setDataTableLoaded() {
     this.set("dataTableLoaded", true);
+  }
+
+  hasError() {
+    this.set("error", true);
   }
 }
 
