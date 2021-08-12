@@ -8,7 +8,7 @@ export class DependencyInjection {
     return this.taskService;
   }
 
-  static injectTask(date, name, note) {
+  static instancieteTask(date, name, note) {
     return new Task(date, name, note);
   }
 }

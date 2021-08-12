@@ -1,5 +1,6 @@
 import { Task } from "../entities/Task.js";
 import { EVENT_LISTENER_TYPES, initEventListnet } from "../tools/util/eventListenerInicializer.js";
+import { getRequest } from "../tools/util/fetchAPI.js";
 
 export class TasksService {
   _mockTasks = [
@@ -41,7 +42,10 @@ export class TasksService {
     this.fetchAllTasks();
   }
 
-  fetchAllTasks() {
+  async fetchAllTasks() {
+    /**TODO take request */
+    let test = await getRequest("http://jsonplaceholder.typicode.com/users");
+    console.log(test);
     setTimeout(() => {
       document.dispatchEvent(this.eventListenerDataTable);
       document.dispatchEvent(this.eventListenerShowTable);
