@@ -1,4 +1,4 @@
-# Onboardin application (start polymer)
+# Onboarding application (start polymer)
 
 ## Simple project to understand how the Polymer components works
 
